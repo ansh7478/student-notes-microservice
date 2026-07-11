@@ -4,17 +4,19 @@ from datetime import datetime
 
 
 # Schema for creating a new note
+from pydantic import BaseModel, Field
+
 class NoteCreate(BaseModel):
-    subject: str
-    title: str
-    content: str
+    subject: str = Field(..., min_length=2, max_length=100)
+    title: str = Field(..., min_length=2, max_length=150)
+    content: str = Field(..., min_length=5, max_length=2000)
 
 
 # Schema for updating an existing note
 class NoteUpdate(BaseModel):
-    subject: str
-    title: str
-    content: str
+    subject: str = Field(..., min_length=2, max_length=100)
+    title: str = Field(..., min_length=2, max_length=150)
+    content: str = Field(..., min_length=5, max_length=2000)
 
 
 # Schema for returning note data
